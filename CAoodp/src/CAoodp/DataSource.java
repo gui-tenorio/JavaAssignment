@@ -51,4 +51,24 @@ public class DataSource {
 		}
 		return rs;
 	}
+
+	public boolean save(String query) {
+		try {
+			stmt.execute(query);
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+
+		}
+	}
+
+	public void closing() {
+		try {
+			stmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 }
