@@ -5,8 +5,9 @@ import java.util.Scanner;
 
 public class Menu {
 
+	Printing print = new Printing();
 	Scanner selection = new Scanner(System.in);
-	
+
 	public void Options() {
 		System.out.println("| MENU |");
 		System.out.println();
@@ -22,16 +23,24 @@ public class Menu {
 		try {
 			switch (option) {
 			case 1:
+				print.displayCoutries();
+				Options();
 				break;
 			case 2:
+				countryByCode();
+				System.out.println();
+				Options();
 				break;
-                case 3:
-                    break;
+			case 3:
+				countryByName();
+				System.out.println();
+				Options();
+				break;
 			case 4:
 				break;
-                case 5:
-                	System.exit(0);
-                    break;
+			case 5:
+				System.exit(0);
+				break;
 
 			default:
 				System.out.println("");
@@ -44,5 +53,20 @@ public class Menu {
 			selection.next();
 			Options();
 		}
+		
+	}
+	
+	public void countryByCode() {
+		System.out.println();
+		System.out.print("Please inform the country code you're looking for: ");
+		String code = selection.next();
+		print.displayCountryByCode(code);
+	}
+	
+	public void countryByName() {
+		System.out.println();
+		System.out.println("Please inform the country name you're looking for: ");
+		String name = selection.next();
+		print.displayCountryByName(name);
 	}
 }
