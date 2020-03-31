@@ -8,4 +8,5 @@ public interface CountryDAO {
 	public Country getCountryByCode(String code);
 	public Country getCountryByName(String name);
 	public boolean save(Country country);
+	public Continent getContinent(String c);
 }

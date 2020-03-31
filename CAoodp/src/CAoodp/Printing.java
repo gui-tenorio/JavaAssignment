@@ -6,7 +6,7 @@ public class Printing {
 	
 	CountryDAO db = new MySqlCountryDAO();
 	
-	public void displayCoutries() {
+	public void displayCountries() {
 		ArrayList<Country> countries = db.getCountries();
 		for(Country c: countries) {
 			System.out.println(c);

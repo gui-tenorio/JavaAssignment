@@ -1,6 +1,7 @@
 package CAoodp;
 
 public enum Continent {
+	
 	ASIA("Asia"),
 	EUROPE("Europe"),
 	NORTH_AMERICA("North America"),

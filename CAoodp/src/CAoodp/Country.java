@@ -61,8 +61,9 @@ public class Country {
 	
 	@Override
 	public String toString() {
-		return "Country [code=" + code + ", name=" + name + ", continent=" + continent + ", surfaceArea=" + surfaceArea
-				+ ", headOfState=" + headOfState + "]";
+		return "Country CODE: " + code + ", NAME: " + name + ", CONTINENT: " + continent + ", SURFACE AREA: " + surfaceArea
+				+ ", HEAD OF STATE: " + headOfState + "";
+
 	}
 
 }

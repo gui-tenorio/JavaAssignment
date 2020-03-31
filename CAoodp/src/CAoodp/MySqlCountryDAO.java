@@ -57,28 +57,20 @@ public class MySqlCountryDAO implements CountryDAO {
 		DataSource db = new DataSource();
 		ResultSet rs = db.select(query);
 		try {
-			rs.next();
-			String name = rs.getString(2);
-			String continentString = rs.getString(3);
-			if (continentString.equals("Africa")) {
-				continent = Continent.AFRICA;
-			} else if (continentString.equals("Asia")) {
-				continent = Continent.ASIA;
-			} else if (continentString.equals("Europe")) {
-				continent = Continent.EUROPE;
-			} else if (continentString.equals("North America")) {
-				continent = Continent.NORTH_AMERICA;
-			} else if (continentString.equals("Antartica")) {
-				continent = Continent.ANTARTICA;
-			} else if (continentString.equals("Oceania")) {
-				continent = Continent.OCEANIA;
-			} else if (continentString.equals("South America")) {
-				continent = Continent.SOUTH_AMERICA;
-			}
-			float surfaceArea = rs.getFloat(4);
-			String headOfState = rs.getString(5);
+			if (rs.next()) {
 
-			c = new Country(code, name, continent, surfaceArea, headOfState);
+				String name = rs.getString(2);
+				String continentString = rs.getString(3);
+
+				continent = getContinent(continentString);
+
+				float surfaceArea = rs.getFloat(4);
+				String headOfState = rs.getString(5);
+
+				c = new Country(code, name, continent, surfaceArea, headOfState);
+			} else {
+				System.out.println("Not found, please try again..");
+			}
 			db.closing();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -93,40 +85,35 @@ public class MySqlCountryDAO implements CountryDAO {
 		DataSource db = new DataSource();
 		ResultSet rs = db.select(query);
 		try {
-			rs.next();
-			String code = rs.getString(1);
-			String continentString = rs.getString(3);
-			if (continentString.equals("Africa")) {
-				continent = Continent.AFRICA;
-			} else if (continentString.equals("Asia")) {
-				continent = Continent.ASIA;
-			} else if (continentString.equals("Europe")) {
-				continent = Continent.EUROPE;
-			} else if (continentString.equals("North America")) {
-				continent = Continent.NORTH_AMERICA;
-			} else if (continentString.equals("Antartica")) {
-				continent = Continent.ANTARTICA;
-			} else if (continentString.equals("Oceania")) {
-				continent = Continent.OCEANIA;
-			} else if (continentString.equals("South America")) {
-				continent = Continent.SOUTH_AMERICA;
-			}
-			float surfaceArea = rs.getFloat(4);
-			String headOfState = rs.getString(5);
 
-			c = new Country(code, name, continent, surfaceArea, headOfState);
+			if (rs.next()) {
+
+				String code = rs.getString(1);
+				String continentString = rs.getString(3);
+
+				continent = getContinent(continentString);
+
+				float surfaceArea = rs.getFloat(4);
+				String headOfState = rs.getString(5);
+
+				c = new Country(code, name, continent, surfaceArea, headOfState);
+
+				return c;
+			} else {
+				System.out.println("Name not found");
+			}
 			db.closing();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return c;
+		return null;
 	}
 
 	@Override
 	public boolean save(Country country) {
 
 		DataSource db = new DataSource();
-		Continent c = null;
+
 		String code = country.getCode();
 		String name = country.getName();
 		Continent continent = country.getContinent();
@@ -138,6 +125,27 @@ public class MySqlCountryDAO implements CountryDAO {
 		db.closing();
 		return result;
 
+	}
+
+	public Continent getContinent(String c) {
+
+		if (c.toLowerCase().equals("africa")) {
+			continent = Continent.AFRICA;
+		} else if (c.toLowerCase().equals("asia")) {
+			continent = Continent.ASIA;
+		} else if (c.toLowerCase().equals("europe")) {
+			continent = Continent.EUROPE;
+		} else if (c.toLowerCase().equals("north america")) {
+			continent = Continent.NORTH_AMERICA;
+		} else if (c.toLowerCase().equals("antartica")) {
+			continent = Continent.ANTARTICA;
+		} else if (c.toLowerCase().equals("oceania")) {
+			continent = Continent.OCEANIA;
+		} else if (c.toLowerCase().equals("south america")) {
+			continent = Continent.SOUTH_AMERICA;
+		}
+
+		return continent;
 	}
 
 }
