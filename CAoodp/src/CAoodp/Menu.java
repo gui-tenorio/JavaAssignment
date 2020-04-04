@@ -97,7 +97,7 @@ public class Menu {
 		
 		continent = db.getContinent(c);
 		
-		Country newCountry = new Country(code, name, continent, surfaceArea, headOfState);
+		Country.BuilderCountry newCountry = new Country.BuilderCountry(code, name, continent, surfaceArea, headOfState);
 		db.save(newCountry);
 		System.out.println("Saved!");
 		

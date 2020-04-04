@@ -8,6 +8,7 @@ import java.sql.Statement;
 
 public class DataSource {
 
+	//database info
 	String dbServer = "jdbc:mysql://52.50.23.197:3306/world";
 	String user = "cctstudent";
 	String password = "Pass1234!";
