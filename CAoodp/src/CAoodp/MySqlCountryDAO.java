@@ -32,7 +32,7 @@ public class MySqlCountryDAO implements CountryDAO {
 					continent = Continent.EUROPE;
 				} else if (continentString.equals("North America")) {
 					continent = Continent.NORTH_AMERICA;
-				} else if (continentString.equals("Antartica")) {
+				} else if (continentString.equals("Antarctica")) {
 					continent = Continent.ANTARCTICA;
 				} else if (continentString.equals("Oceania")) {
 					continent = Continent.OCEANIA;
@@ -120,7 +120,7 @@ public class MySqlCountryDAO implements CountryDAO {
 
 		String code = country.build().getCode();
 		String name = country.build().getName();
-		Continent continent = country.build().getContinent();
+		String continent = country.build().getContinent().getName();
 		float surfaceArea = country.build().getSurfaceArea();
 		String headOfState = country.build().getHeadOfState();
 		String query = "INSERT INTO country (Code, Name, Continent, SurfaceArea, HeadOfState) VALUES " + "('" + code
