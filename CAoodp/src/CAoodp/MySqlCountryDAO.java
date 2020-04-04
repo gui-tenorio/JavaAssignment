@@ -4,13 +4,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import CAoodp.Country.BuilderCountry;
+
 public class MySqlCountryDAO implements CountryDAO {
 
 	Continent continent;
 
 	@Override
-	public ArrayList<Country> getCountries() {
-		ArrayList<Country> countries = new ArrayList<Country>();
+	public ArrayList<Country.BuilderCountry> getCountries() {
+		ArrayList<Country.BuilderCountry> countries = new ArrayList<Country.BuilderCountry>();
 		String query = "SELECT * FROM country";
 
 		DataSource db = new DataSource();
@@ -31,7 +33,7 @@ public class MySqlCountryDAO implements CountryDAO {
 				} else if (continentString.equals("North America")) {
 					continent = Continent.NORTH_AMERICA;
 				} else if (continentString.equals("Antartica")) {
-					continent = Continent.ANTARTICA;
+					continent = Continent.ANTARCTICA;
 				} else if (continentString.equals("Oceania")) {
 					continent = Continent.OCEANIA;
 				} else if (continentString.equals("South America")) {
@@ -40,7 +42,7 @@ public class MySqlCountryDAO implements CountryDAO {
 				float surfaceArea = rs.getFloat(4);
 				String headOfState = rs.getString(5);
 
-				countries.add(new Country(code, name, continent, surfaceArea, headOfState));
+				countries.add(new Country.BuilderCountry(code, name, continent, surfaceArea, headOfState));
 			}
 			db.closing();
 		} catch (SQLException e) {
@@ -50,8 +52,8 @@ public class MySqlCountryDAO implements CountryDAO {
 	}
 
 	@Override
-	public Country getCountryByCode(String code) {
-		Country c = null;
+	public Country.BuilderCountry getCountryByCode(String code) {
+		Country.BuilderCountry c = null;
 		String query = "SELECT * FROM country WHERE Code = '" + code + "'";
 
 		DataSource db = new DataSource();
@@ -67,7 +69,9 @@ public class MySqlCountryDAO implements CountryDAO {
 				float surfaceArea = rs.getFloat(4);
 				String headOfState = rs.getString(5);
 
-				c = new Country(code, name, continent, surfaceArea, headOfState);
+				c = new Country.BuilderCountry(code, name, continent, surfaceArea, headOfState);
+
+				return c;
 			} else {
 				System.out.println("Not found, please try again..");
 			}
@@ -79,8 +83,8 @@ public class MySqlCountryDAO implements CountryDAO {
 	}
 
 	@Override
-	public Country getCountryByName(String name) {
-		Country c = null;
+	public Country.BuilderCountry getCountryByName(String name) {
+		Country.BuilderCountry c = null;
 		String query = "SELECT * FROM country WHERE Name = '" + name + "'";
 		DataSource db = new DataSource();
 		ResultSet rs = db.select(query);
@@ -96,7 +100,7 @@ public class MySqlCountryDAO implements CountryDAO {
 				float surfaceArea = rs.getFloat(4);
 				String headOfState = rs.getString(5);
 
-				c = new Country(code, name, continent, surfaceArea, headOfState);
+				c = new Country.BuilderCountry(code, name, continent, surfaceArea, headOfState);
 
 				return c;
 			} else {
@@ -110,15 +114,15 @@ public class MySqlCountryDAO implements CountryDAO {
 	}
 
 	@Override
-	public boolean save(Country country) {
+	public boolean save(Country.BuilderCountry country) {
 
 		DataSource db = new DataSource();
 
-		String code = country.getCode();
-		String name = country.getName();
-		Continent continent = country.getContinent();
-		float surfaceArea = country.getSurfaceArea();
-		String headOfState = country.getHeadOfState();
+		String code = country.build().getCode();
+		String name = country.build().getName();
+		Continent continent = country.build().getContinent();
+		float surfaceArea = country.build().getSurfaceArea();
+		String headOfState = country.build().getHeadOfState();
 		String query = "INSERT INTO country (Code, Name, Continent, SurfaceArea, HeadOfState) VALUES " + "('" + code
 				+ "','" + name + "','" + continent + "','" + surfaceArea + "','" + headOfState + "')";
 		boolean result = db.save(query);
@@ -137,8 +141,8 @@ public class MySqlCountryDAO implements CountryDAO {
 			continent = Continent.EUROPE;
 		} else if (c.toLowerCase().equals("north america")) {
 			continent = Continent.NORTH_AMERICA;
-		} else if (c.toLowerCase().equals("antartica")) {
-			continent = Continent.ANTARTICA;
+		} else if (c.toLowerCase().equals("antarctica")) {
+			continent = Continent.ANTARCTICA;
 		} else if (c.toLowerCase().equals("oceania")) {
 			continent = Continent.OCEANIA;
 		} else if (c.toLowerCase().equals("south america")) {
@@ -147,5 +151,6 @@ public class MySqlCountryDAO implements CountryDAO {
 
 		return continent;
 	}
+
 
 }
