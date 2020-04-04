@@ -7,6 +7,7 @@ public class Menu {
 
 	Printing print = new Printing();
 	Scanner selection = new Scanner(System.in);
+	CountryDAO db = new MySqlCountryDAO();
 
 	public void Options() {
 		System.out.println("| MENU |");
@@ -23,7 +24,7 @@ public class Menu {
 		try {
 			switch (option) {
 			case 1:
-				print.displayCoutries();
+				print.displayCountries();
 				Options();
 				break;
 			case 2:
@@ -37,8 +38,12 @@ public class Menu {
 				Options();
 				break;
 			case 4:
+				newCountry();
+				System.out.println();
+				Options();
 				break;
 			case 5:
+				System.out.println("Bye, bye....");
 				System.exit(0);
 				break;
 
@@ -53,20 +58,51 @@ public class Menu {
 			selection.next();
 			Options();
 		}
-		
+
 	}
-	
+
 	public void countryByCode() {
 		System.out.println();
 		System.out.print("Please inform the country code you're looking for: ");
 		String code = selection.next();
 		print.displayCountryByCode(code);
 	}
-	
+
 	public void countryByName() {
 		System.out.println();
 		System.out.println("Please inform the country name you're looking for: ");
-		String name = selection.next();
+		Scanner sc = new Scanner(System.in);
+		String name = sc.nextLine();
 		print.displayCountryByName(name);
+	}
+
+	public void newCountry() {
+
+		System.out.println();
+		System.out.println("-----ADDING A NEW COUNTRY-----");
+		System.out.println("Code: ");
+		String code = selection.next();
+
+		Scanner sca = new Scanner(System.in);
+		System.out.println("Name: ");
+		String name = sca.nextLine();
+
+		System.out.println("Continent: ");
+		String c = sca.nextLine();
+
+		System.out.println("Surface Area: ");
+		float surfaceArea = selection.nextFloat();
+
+		System.out.println("Head of State: ");
+		String headOfState = sca.nextLine();
+
+		Continent continent = null;
+
+		continent = db.getContinent(c);
+
+		Country.BuilderCountry newCountry = new Country.BuilderCountry(code, name, continent, surfaceArea, headOfState);
+		db.save(newCountry);
+		System.out.println("Saved!");
+
 	}
 }

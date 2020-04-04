@@ -6,25 +6,20 @@ public class Printing {
 	
 	CountryDAO db = new MySqlCountryDAO();
 	
-	public void displayCoutries() {
-		ArrayList<Country> countries = db.getCountries();
-		for(Country c: countries) {
-			System.out.println(c);
+	public void displayCountries() {
+		ArrayList<Country.BuilderCountry> countries = db.getCountries();
+		for(Country.BuilderCountry c: countries) {
+			System.out.println(c.build());
 		}
 	}
 
 	public void displayCountryByCode(String code) {
-		Country c = db.getCountryByCode(code);
-		System.out.println(c);
+		Country.BuilderCountry c = db.getCountryByCode(code);
+		System.out.println(c.build());
 	}
 	
 	public void displayCountryByName(String name) {
-		Country country = db.getCountryByName(name);
-		System.out.println(country);
-	}
-	
-	public void addNewCountry(Country country) {
-		db.save(country);
-		
+		Country.BuilderCountry country = db.getCountryByName(name);
+		System.out.println(country.build());
 	}
 }
