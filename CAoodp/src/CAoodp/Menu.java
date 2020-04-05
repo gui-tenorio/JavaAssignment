@@ -9,6 +9,7 @@ public class Menu {
 	Scanner selection = new Scanner(System.in);
 	CountryDAO db = new MySqlCountryDAO();
 
+	// menu options
 	public void Options() {
 		System.out.println("| MENU |");
 		System.out.println();
@@ -61,6 +62,7 @@ public class Menu {
 
 	}
 
+	//method to get country code and show to the user
 	public void countryByCode() {
 		System.out.println();
 		System.out.print("Please inform the country code you're looking for: ");
@@ -68,6 +70,7 @@ public class Menu {
 		print.displayCountryByCode(code);
 	}
 
+	////method to get country name and show to the user
 	public void countryByName() {
 		System.out.println();
 		System.out.println("Please inform the country name you're looking for: ");
@@ -76,6 +79,8 @@ public class Menu {
 		print.displayCountryByName(name);
 	}
 
+	
+	// //method that adds new country 
 	public void newCountry() {
 
 		System.out.println();

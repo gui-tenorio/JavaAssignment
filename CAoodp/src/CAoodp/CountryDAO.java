@@ -2,6 +2,7 @@ package CAoodp;
 
 import java.util.ArrayList;
 
+// interface class
 public interface CountryDAO {
 
 	public ArrayList<Country.BuilderCountry> getCountries();

@@ -42,6 +42,7 @@ public class DataSource {
 		}
 	}
 
+	
 	public ResultSet select(String query) {
 		ResultSet rs = null;
 		try {
@@ -53,6 +54,7 @@ public class DataSource {
 		return rs;
 	}
 
+	
 	public boolean save(String query) {
 		try {
 			stmt.execute(query);

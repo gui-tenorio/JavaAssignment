@@ -13,10 +13,12 @@ public enum Continent {
 	
 	private final String name;
 	
+	
 	Continent(String name){
 		this.name = name;
 	}
 	
+	//method that returns continent string
 	public String getName() {
 		return this.name;
 	}
