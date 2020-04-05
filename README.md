@@ -1,8 +1,4 @@
+
 Guilherme Tenorio - 2017160
 
-
-Patterns Apllied:
-
-Builder - 
-
-Factory - 
+Factory abstract and Builder patterns were used for the reason that the project has multiple sub classes and multiple attributes with big numbers of parameters
