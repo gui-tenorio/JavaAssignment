@@ -1,6 +1,6 @@
 package CAoodp;
 
-// factory + builder pattern class
+// factory abstract + builder pattern class
 public abstract class CountryFactory {
 
 	protected String code;
