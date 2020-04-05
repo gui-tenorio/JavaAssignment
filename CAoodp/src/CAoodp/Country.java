@@ -12,6 +12,5 @@ public class Country extends CountryFactory{
 		public String toString() {
 			return "Country CODE: " + code + ", NAME: " + name + ", CONTINENT: " + continent + ", SURFACE AREA: "
 					+ surfaceArea + ", HEAD OF STATE: " + headOfState + "";
-
 		}
 }

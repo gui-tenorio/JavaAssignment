@@ -4,12 +4,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-
-
 public class MySqlCountryDAO implements CountryDAO {
 
 	Continent continent;
 
+	// method that executes select command on db and get the countries
 	@Override
 	public ArrayList<Country.BuilderCountry> getCountries() {
 		ArrayList<Country.BuilderCountry> countries = new ArrayList<Country.BuilderCountry>();
@@ -51,9 +50,12 @@ public class MySqlCountryDAO implements CountryDAO {
 		return countries;
 	}
 
+	// method that executes select command on db and get countries codes
 	@Override
 	public Country.BuilderCountry getCountryByCode(String code) {
+
 		Country.BuilderCountry c = null;
+
 		String query = "SELECT * FROM country WHERE Code = '" + code + "'";
 
 		DataSource db = new DataSource();
@@ -82,6 +84,7 @@ public class MySqlCountryDAO implements CountryDAO {
 		return c;
 	}
 
+	// method that executes select command on db and get countries names
 	@Override
 	public Country.BuilderCountry getCountryByName(String name) {
 		Country.BuilderCountry c = null;
@@ -113,6 +116,7 @@ public class MySqlCountryDAO implements CountryDAO {
 		return null;
 	}
 
+	// method that inserts new info into the db
 	@Override
 	public boolean save(Country.BuilderCountry country) {
 
@@ -151,6 +155,5 @@ public class MySqlCountryDAO implements CountryDAO {
 
 		return continent;
 	}
-
 
 }
